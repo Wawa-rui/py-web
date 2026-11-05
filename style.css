@@ -1,0 +1,1184 @@
+/* ========================================================
+   루이 13세 공식 웹사이트 스타일시트 (style.css)
+   컨셉: 별이 반짝이는 밤하늘 (Starry Night Sky)
+         + 캐릭터가 한눈에 보이는 밝은 황금 태양 프로필
+   ======================================================== */
+
+:root {
+  /* 밤하늘 배경 팔레트 */
+  --bg-night-deep: #08090E;
+  --bg-night-blue: #0F1420;
+  --bg-night-card: rgba(18, 23, 35, 0.78);
+  --bg-card-border: rgba(245, 200, 98, 0.28);
+
+  /* 태양 프로필 & 왕실 골드 */
+  --sun-center: #FFFDF0;
+  --sun-mid: #FFE58F;
+  --sun-outer: #F3B336;
+  --gold-primary: #F5C038;
+  --gold-light: #FFECA1;
+  --gold-dark: #C2820E;
+  --gold-gradient: linear-gradient(135deg, #FFF099 0%, #F5C038 50%, #B87B08 100%);
+
+  /* 치와와 & 로열 포인트 */
+  --chihuahua-tan: #F5B05E;
+  --royal-ruby: #E63946;
+  --royal-cape: #9E192D;
+
+  /* 텍스트 컬러 (밤하늘 대비 최적화) */
+  --text-main: #F8F9FD;
+  --text-muted: #A6B0C3;
+  --text-gold: #FCE185;
+
+  --font-royal: 'Cinzel', serif;
+  --font-serif: 'Song Myung', serif;
+  --font-sans: 'Noto Sans KR', sans-serif;
+
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-pill: 50px;
+
+  --shadow-sun: 0 0 70px rgba(245, 192, 56, 0.5), 0 0 130px rgba(245, 179, 54, 0.25);
+  --shadow-card: 0 12px 35px rgba(0, 0, 0, 0.55);
+}
+
+/* 리셋 & 기본 설정 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-night-deep);
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, #172138 0%, #0B0E17 55%, #05060A 100%);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  line-height: 1.65;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* 배경 별빛 캔버스 (반짝이는 밤하늘) */
+#bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 상단 네비게이션 */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(8, 10, 15, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--bg-card-border);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--gold-light);
+  font-family: var(--font-royal);
+  font-weight: 900;
+  font-size: 1.3rem;
+  letter-spacing: 1.5px;
+}
+
+.crown-icon {
+  font-size: 1.4rem;
+  animation: crownBob 2.4s ease-in-out infinite;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1.8rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.25s ease;
+  position: relative;
+}
+
+.nav-links a:hover {
+  color: var(--gold-light);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gold-primary);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.sound-btn {
+  background: rgba(245, 192, 56, 0.12);
+  border: 1.5px solid var(--bg-card-border);
+  color: var(--gold-light);
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.25s ease;
+}
+
+.sound-btn:hover {
+  background: var(--gold-primary);
+  color: #0c0d12;
+  box-shadow: 0 0 15px rgba(245, 192, 56, 0.4);
+}
+
+/* ========================================================
+   히어로 섹션 (별빛 밤하늘 + 태양 프로필)
+   ======================================================== */
+.hero-section {
+  position: relative;
+  z-index: 1;
+  padding: 8.5rem 1.5rem 4rem;
+  text-align: center;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 1.4rem;
+  border-radius: var(--radius-pill);
+  background: rgba(245, 192, 56, 0.12);
+  border: 1.5px solid var(--gold-primary);
+  color: var(--gold-light);
+  font-family: var(--font-royal);
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 0 20px rgba(245, 192, 56, 0.25);
+}
+
+.hero-title {
+  margin-bottom: 1.2rem;
+  line-height: 1.25;
+}
+
+.hero-title .sub-title {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  color: var(--chihuahua-tan);
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 0.4rem;
+}
+
+.hero-title .main-title {
+  display: block;
+  font-family: var(--font-royal);
+  font-size: 3.5rem;
+  font-weight: 900;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 14px rgba(245, 192, 56, 0.35));
+}
+
+.hero-desc {
+  color: #D3D9E6;
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.8;
+}
+
+.hero-desc strong {
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
+/* ========================================================
+   태양 프로필 존 (Sun Profile Frame)
+   - 검은색 단모 치와와가 100% 또렷하게 보이도록 만든 밝은 태양 원형 액자
+   ======================================================== */
+.character-container {
+  position: relative;
+  width: 370px;
+  height: 390px;
+  margin: 0 auto 2.8rem;
+}
+
+.sun-profile-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 240, 160, 0.3) 0%, rgba(245, 192, 56, 0.15) 50%, transparent 75%);
+  box-shadow: var(--shadow-sun);
+  filter: blur(8px);
+  animation: sunGlowPulse 4s ease-in-out infinite alternate;
+}
+
+.chihuahua-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.louis-svg {
+  width: 360px;
+  height: 380px;
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.8));
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.louis-svg:hover {
+  transform: scale(1.05) translateY(-5px);
+}
+
+.royal-crown {
+  transform-origin: 180px 75px;
+  animation: crownGlint 3s ease-in-out infinite;
+}
+
+.character-speech-bubble {
+  position: absolute;
+  top: -15px;
+  right: -55px;
+  background: #FFFDF5;
+  color: #1A1A1E;
+  padding: 0.85rem 1.15rem;
+  border-radius: 20px;
+  border-bottom-left-radius: 4px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  max-width: 220px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+  border: 2px solid var(--gold-primary);
+  animation: bubbleFloat 3s ease-in-out infinite alternate;
+  z-index: 5;
+}
+
+/* 퀵 스펙 배지 */
+.hero-quick-stats {
+  display: flex;
+  justify-content: center;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.8rem;
+}
+
+.stat-badge {
+  background: var(--bg-night-card);
+  border: 1.5px solid var(--bg-card-border);
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1.4rem;
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+}
+
+.stat-badge:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 18px rgba(245, 192, 56, 0.25);
+}
+
+.badge-title {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.badge-value {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--gold-light);
+}
+
+.badge-value.highlight {
+  color: #FF7B93;
+}
+
+/* 버튼 스타일 */
+.btn {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: none;
+}
+
+.btn-royal {
+  background: var(--gold-gradient);
+  color: #121008;
+  font-weight: 800;
+  box-shadow: 0 8px 25px rgba(245, 192, 56, 0.35);
+}
+
+.btn-royal:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(245, 192, 56, 0.55);
+  filter: brightness(1.08);
+}
+
+.btn-outline {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid var(--gold-primary);
+  color: var(--gold-light);
+  backdrop-filter: blur(6px);
+}
+
+.btn-outline:hover {
+  background: rgba(245, 192, 56, 0.15);
+  color: #FFF;
+  transform: translateY(-3px);
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+/* ========================================================
+   공통 섹션 레이아웃
+   ======================================================== */
+.content-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 6rem;
+  position: relative;
+  z-index: 1;
+}
+
+.section {
+  padding: 5.5rem 0 3rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.section-tag {
+  display: inline-block;
+  color: var(--chihuahua-tan);
+  font-family: var(--font-royal);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 0.4rem;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.section-sub {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.royal-divider {
+  color: var(--gold-primary);
+  font-size: 1.1rem;
+  margin-top: 0.8rem;
+  letter-spacing: 6px;
+}
+
+/* ========================================================
+   1. 폐하의 칙서 (About - Night Scroll)
+   ======================================================== */
+.decree-scroll {
+  position: relative;
+  background: var(--bg-night-card);
+  border: 1.5px solid var(--bg-card-border);
+  border-radius: var(--radius-lg);
+  padding: 3.8rem 3.2rem 2.8rem;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(12px);
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.decree-scroll::before,
+.decree-scroll::after {
+  content: '';
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border-color: var(--gold-primary);
+  border-style: solid;
+  pointer-events: none;
+}
+
+.decree-scroll::before {
+  top: 14px;
+  left: 14px;
+  border-width: 2px 0 0 2px;
+}
+
+.decree-scroll::after {
+  bottom: 14px;
+  right: 14px;
+  border-width: 0 2px 2px 0;
+}
+
+.scroll-seal {
+  position: absolute;
+  top: -26px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 52px;
+  height: 52px;
+  background: var(--royal-cape);
+  border: 2.5px solid var(--gold-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-royal);
+  color: var(--gold-light);
+  font-weight: 900;
+  font-size: 0.95rem;
+  box-shadow: 0 6px 18px rgba(158, 25, 45, 0.45);
+}
+
+.decree-quote {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  color: var(--gold-light);
+  font-weight: 800;
+  margin-bottom: 1.6rem;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.decree-content p {
+  color: #DDE2EC;
+  font-size: 1.05rem;
+  margin-bottom: 1.3rem;
+  line-height: 1.9;
+}
+
+.decree-signature {
+  text-align: right;
+  margin-top: 2rem;
+  padding-top: 1.2rem;
+  border-top: 1px dashed rgba(245, 192, 56, 0.3);
+}
+
+.sig-name {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--gold-light);
+  font-weight: 800;
+}
+
+/* ========================================================
+   2. 왕실 스펙 (Stats Grid)
+   ======================================================== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 1.5rem;
+}
+
+.stat-card {
+  background: var(--bg-night-card);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 1.6rem;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold-primary);
+  box-shadow: 0 10px 25px rgba(245, 192, 56, 0.15);
+}
+
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.stat-name {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-main);
+}
+
+.stat-num {
+  font-family: var(--font-royal);
+  font-weight: 900;
+  color: var(--gold-light);
+  font-size: 1.1rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 9px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 0.85rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--gold-gradient);
+  border-radius: 10px;
+  transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.progress-fill.warning {
+  background: linear-gradient(90deg, #F39C12, #E67E22);
+}
+
+.progress-fill.danger {
+  background: linear-gradient(90deg, #E74C3C, #C0392B);
+}
+
+.stat-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* ========================================================
+   3. 일과표 (Timeline)
+   ======================================================== */
+.timeline {
+  position: relative;
+  max-width: 740px;
+  margin: 0 auto;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  bottom: 15px;
+  left: 36px;
+  width: 2.5px;
+  background: linear-gradient(to bottom, var(--gold-primary), rgba(245, 192, 56, 0.1));
+}
+
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.8rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.time-marker {
+  width: 74px;
+  height: 40px;
+  background: var(--royal-cape);
+  border: 2px solid var(--gold-primary);
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-royal);
+  font-weight: 800;
+  font-size: 0.88rem;
+  color: var(--gold-light);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.timeline-card {
+  background: var(--bg-night-card);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 1.3rem 1.6rem;
+  flex-grow: 1;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
+}
+
+.timeline-card:hover {
+  border-color: var(--gold-primary);
+  transform: translateX(4px);
+}
+
+.timeline-card h3 {
+  font-size: 1.1rem;
+  color: var(--gold-light);
+  margin-bottom: 0.35rem;
+  font-weight: 700;
+}
+
+.timeline-card p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+/* ========================================================
+   4. 간식 조공 인터랙티브 존 (Tribute Zone)
+   ======================================================== */
+.tribute-section {
+  background: radial-gradient(circle at center, rgba(245, 192, 56, 0.08) 0%, rgba(18, 23, 35, 0.85) 70%);
+  border-radius: var(--radius-lg);
+  padding: 4.5rem 2.5rem;
+  border: 1.5px solid var(--bg-card-border);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(12px);
+}
+
+.tribute-counter-box {
+  background: rgba(11, 14, 22, 0.9);
+  border: 2px solid var(--gold-primary);
+  border-radius: var(--radius-md);
+  max-width: 500px;
+  margin: 0 auto 3.2rem;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(245, 192, 56, 0.2);
+}
+
+.counter-label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 0.4rem;
+}
+
+.counter-number-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.counter-num {
+  font-family: var(--font-royal);
+  font-size: 3.8rem;
+  font-weight: 900;
+  color: var(--gold-light);
+  line-height: 1;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.counter-num.bump {
+  transform: scale(1.22);
+  color: #FFF;
+}
+
+.counter-unit {
+  font-size: 1.3rem;
+  color: var(--gold-primary);
+  font-weight: 800;
+}
+
+.king-reaction {
+  font-family: var(--font-serif);
+  color: var(--chihuahua-tan);
+  font-size: 1.1rem;
+  font-weight: 700;
+  min-height: 30px;
+  transition: all 0.3s ease;
+}
+
+.tribute-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.3rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.tribute-btn {
+  background: var(--bg-night-card);
+  border: 1.5px solid var(--bg-card-border);
+  border-radius: var(--radius-md);
+  padding: 1.8rem 1.2rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text-main);
+  box-shadow: var(--shadow-card);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+
+.tribute-btn:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold-light);
+  box-shadow: 0 12px 28px rgba(245, 192, 56, 0.25);
+  background: rgba(30, 38, 56, 0.85);
+}
+
+.tribute-btn:active {
+  transform: scale(0.96);
+}
+
+.snack-icon {
+  font-size: 3rem;
+  transition: transform 0.25s ease;
+}
+
+.tribute-btn:hover .snack-icon {
+  transform: scale(1.2) rotate(6deg);
+}
+
+.snack-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.snack-sub {
+  font-size: 0.82rem;
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+/* ========================================================
+   5. 왕실 갤러리 (Gallery)
+   ======================================================== */
+.gallery-controls {
+  text-align: center;
+  margin-bottom: 2.8rem;
+}
+
+.btn-gold-outline {
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--gold-primary);
+  background: rgba(245, 192, 56, 0.1);
+  color: var(--gold-light);
+  font-weight: 700;
+  font-size: 0.98rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+}
+
+.btn-gold-outline:hover {
+  background: var(--gold-primary);
+  color: #0b0d12;
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(245, 192, 56, 0.4);
+}
+
+.upload-tip {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.7rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.6rem;
+}
+
+.gallery-card {
+  background: var(--bg-night-card);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.gallery-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold-primary);
+  box-shadow: 0 10px 25px rgba(245, 192, 56, 0.2);
+}
+
+.gallery-img-wrapper {
+  height: 200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+.gallery-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-icon-art {
+  font-size: 3.8rem;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+}
+
+.velvet-bg { background: linear-gradient(135deg, #242938, #181B26); }
+.sun-bg { background: linear-gradient(135deg, #382E1E, #1F1B14); }
+.treat-bg { background: linear-gradient(135deg, #3A2027, #211922); }
+.fortress-bg { background: linear-gradient(135deg, #1C2738, #131A26); }
+
+.gallery-info {
+  padding: 1.3rem;
+}
+
+.photo-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  background: rgba(245, 192, 56, 0.15);
+  color: var(--gold-light);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.gallery-info h4 {
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+.gallery-info p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ========================================================
+   6. 충성 방명록 (Guestbook)
+   ======================================================== */
+.guestbook-container {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.guestbook-form {
+  background: var(--bg-night-card);
+  border: 1.5px solid var(--bg-card-border);
+  border-radius: var(--radius-md);
+  padding: 2.2rem;
+  margin-bottom: 2.8rem;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(12px);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-bottom: 1.1rem;
+}
+
+.form-group label {
+  font-size: 0.88rem;
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: rgba(9, 12, 18, 0.85);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 1rem;
+  color: #FFF;
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 12px rgba(245, 192, 56, 0.3);
+}
+
+.btn-submit {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.guestbook-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+.guest-card {
+  background: var(--bg-night-card);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  border-left: 5px solid var(--gold-primary);
+  border-radius: var(--radius-sm);
+  padding: 1.4rem 1.6rem;
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(8px);
+  transition: transform 0.2s ease;
+}
+
+.guest-card:hover {
+  transform: translateX(4px);
+  border-color: var(--gold-primary);
+}
+
+.guest-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+
+.guest-author {
+  font-weight: 800;
+  color: var(--gold-light);
+  font-size: 1rem;
+}
+
+.guest-badge {
+  font-size: 0.78rem;
+  background: rgba(245, 192, 56, 0.15);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
+.guest-msg {
+  font-size: 0.95rem;
+  color: #E2E8F4;
+  line-height: 1.65;
+  margin-bottom: 0.5rem;
+}
+
+.guest-date {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+/* ========================================================
+   푸터
+   ======================================================== */
+.royal-footer {
+  border-top: 1.5px solid var(--bg-card-border);
+  background: #05060A;
+  padding: 4rem 1.5rem 3.5rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-seal {
+  font-family: var(--font-royal);
+  color: var(--gold-primary);
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+}
+
+.footer-text {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin-bottom: 1.5rem;
+}
+
+.copyright {
+  font-size: 0.8rem;
+  color: #616A7D;
+}
+
+/* ========================================================
+   토스트 & 파티클 스타일
+   ======================================================== */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: rgba(12, 16, 24, 0.95);
+  border: 1.5px solid var(--gold-primary);
+  color: var(--gold-light);
+  font-weight: 700;
+  padding: 1rem 1.6rem;
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8);
+  z-index: 2000;
+  transform: translateY(120px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.flying-emoji {
+  position: fixed;
+  pointer-events: none;
+  font-size: 2.3rem;
+  z-index: 9999;
+  animation: flyUp 1.2s forwards cubic-bezier(0.12, 0.8, 0.32, 1);
+}
+
+/* ========================================================
+   키프레임 애니메이션
+   ======================================================== */
+@keyframes crownBob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(-6deg); }
+}
+
+@keyframes sunGlowPulse {
+  0% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.7; }
+  100% { transform: translate(-50%, -50%) scale(1.08); opacity: 1; }
+}
+
+@keyframes crownGlint {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(3deg) scale(1.04); }
+}
+
+@keyframes bubbleFloat {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-7px); }
+}
+
+@keyframes flyUp {
+  0% {
+    transform: translate(0, 0) scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(1.4);
+    opacity: 0;
+  }
+}
+
+/* ========================================================
+   반응형 미디어 쿼리
+   ======================================================== */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hero-title .main-title {
+    font-size: 2.5rem;
+  }
+
+  .character-speech-bubble {
+    right: 0px;
+    top: -25px;
+    font-size: 0.82rem;
+    max-width: 180px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .decree-scroll {
+    padding: 2.8rem 1.6rem 2rem;
+  }
+
+  .time-marker {
+    width: 66px;
+    font-size: 0.82rem;
+  }
+}

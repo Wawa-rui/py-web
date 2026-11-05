@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>루이 13세 폐하 공식 궁전 | 별빛 밤하늘 & 태양의 4.8kg 단모 치와와</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Noto+Sans+KR:wght@300;400;600;700;900&family=Song+Myung&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- 별빛 밤하늘 반짝이는 캔버스 -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- 상단 네비게이션 -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">
+        <span class="crown-icon">👑</span>
+        <span class="logo-text">LOUIS XIII</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">폐하의 칙서</a></li>
+        <li><a href="#stats">왕실 스펙</a></li>
+        <li><a href="#routine">일과표</a></li>
+        <li><a href="#tribute">간식 조공</a></li>
+        <li><a href="#gallery">갤러리</a></li>
+        <li><a href="#guestbook">충성 방명록</a></li>
+      </ul>
+      <button id="sound-toggle" class="sound-btn" title="왕실 팡파르 효과음 켜기/끄기">
+        <span id="sound-icon">🔔</span> 효과음
+      </button>
+    </div>
+  </nav>
+
+  <!-- 메인 히어로 섹션 -->
+  <header id="hero" class="hero-section">
+    <div class="hero-badge">✨ STARRY NIGHT PALACE • EST. 7 YEARS ✨</div>
+    <h1 class="hero-title">
+      <span class="sub-title">밤하늘을 비추는 태양 같은 귀여움!</span>
+      <span class="main-title">루이 13세 폐하</span>
+    </h1>
+    <p class="hero-desc">
+      밤하늘에 떠오른 황금 태양처럼 환하게 빛나는 <strong>동글동글 4.8kg 단모 블랙탄 치와와</strong>!<br>
+      매끈한 흑단빛 털과 카리스마 넘치는 새하얀 눈썹 & 허스키 문양, 보석 왕관을 쓴 거실 왕국의 국왕 <strong>루이 13세</strong>의 공식 궁전입니다.
+    </p>
+
+    <!-- 루이 13세 태양 프로필 캐릭터 (SVG) -->
+    <div class="character-container">
+      <div class="sun-profile-glow"></div>
+      <div class="chihuahua-card">
+        <!-- 밤하늘에서 강아지가 100% 또렷하게 보이는 태양 프로필 SVG -->
+        <svg class="louis-svg" viewBox="0 0 380 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <!-- 1. 프로필 태양 디스크 그라데이션 (밝고 따뜻한 황금 햇살) -->
+            <radialGradient id="sunProfileBg" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#FFFDF2"/>
+              <stop offset="45%" stop-color="#FFEBA0"/>
+              <stop offset="80%" stop-color="#F7C647"/>
+              <stop offset="100%" stop-color="#D9911C"/>
+            </radialGradient>
+
+            <!-- 2. 매끄러운 단모 블랙 벨벳 털 그라데이션 -->
+            <radialGradient id="sleekBlackCoat" cx="35%" cy="30%" r="70%">
+              <stop offset="0%" stop-color="#363942"/>
+              <stop offset="50%" stop-color="#1B1C22"/>
+              <stop offset="100%" stop-color="#0E0F13"/>
+            </radialGradient>
+
+            <!-- 3. 따뜻한 꿀빛 탠 포인트 (Tan Point) -->
+            <linearGradient id="honeyTan" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#FDB968"/>
+              <stop offset="100%" stop-color="#CE7D2A"/>
+            </linearGradient>
+
+            <!-- 4. 왕실 황금 왕관 그라데이션 -->
+            <linearGradient id="royalGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FFF6AA"/>
+              <stop offset="40%" stop-color="#FCD34D"/>
+              <stop offset="100%" stop-color="#B47B0B"/>
+            </linearGradient>
+
+            <!-- 5. 벨벳 망토 그라데이션 -->
+            <linearGradient id="royalCapeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#E63946"/>
+              <stop offset="100%" stop-color="#831221"/>
+            </linearGradient>
+
+            <!-- 부드러운 볼터치 블러 -->
+            <filter id="softBlush" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="3.5"/>
+            </filter>
+          </defs>
+
+          <!-- ==============================================
+               [LAYER 1] 태양 프로필 원형 프레임 (Sun Frame)
+               - 검은 강아지를 눈부시게 밝혀주는 원형 태양 배경
+               ============================================== -->
+          <!-- 태양 햇살 방사선 -->
+          <g opacity="0.6">
+            <circle cx="190" cy="200" r="165" stroke="#FDE68A" stroke-width="2" stroke-dasharray="6 8"/>
+            <circle cx="190" cy="200" r="176" stroke="#F5C038" stroke-width="1.5" opacity="0.4"/>
+            <!-- 별빛 반짝이들 -->
+            <path d="M190 20 L193 28 L201 31 L193 34 L190 42 L187 34 L179 31 L187 28 Z" fill="#FFE58F"/>
+            <path d="M40 180 L42 186 L48 188 L42 190 L40 196 L38 190 L32 188 L38 186 Z" fill="#FFE58F"/>
+            <path d="M340 180 L342 186 L348 188 L342 190 L340 196 L338 190 L332 188 L338 186 Z" fill="#FFE58F"/>
+          </g>
+
+          <!-- 밝고 따뜻한 황금빛 태양 원판 -->
+          <circle cx="190" cy="200" r="150" fill="url(#sunProfileBg)" stroke="#B87B08" stroke-width="4"/>
+          <!-- 안쪽 섬세한 골드 링 -->
+          <circle cx="190" cy="200" r="142" stroke="#FFF7C2" stroke-width="2.5" opacity="0.8"/>
+
+          <!-- ==============================================
+               [LAYER 2] 루이 13세 본체 (동글동글 4.8kg 귀요미)
+               ============================================== -->
+          <!-- 1. 귀여운 로열 레드 망토 (뒤쪽) -->
+          <path d="M110 270 Q70 330 85 365 L295 365 Q310 330 270 270 Z" fill="url(#royalCapeGrad)"/>
+          <path d="M85 358 L295 358 L290 368 L90 368 Z" fill="#FCD34D"/>
+
+          <!-- 2. 포동포동 4.8kg 찹쌀떡 바디 (완전 동글동글한 몸) -->
+          <ellipse cx="190" cy="290" rx="86" ry="74" fill="url(#sleekBlackCoat)"/>
+
+          <!-- 가슴의 하트 모양 황금빛 탠 마크 -->
+          <path d="M150 258 C165 285 180 305 190 320 C200 305 215 285 230 258 C215 248 165 248 150 258 Z" fill="url(#honeyTan)"/>
+
+          <!-- 3. 앞발 (오동통하고 앙증맞은 2개의 솜방망이) -->
+          <!-- 왼발 -->
+          <ellipse cx="150" cy="350" rx="20" ry="15" fill="url(#honeyTan)"/>
+          <circle cx="143" cy="350" r="3" fill="#FFE7B3" opacity="0.6"/>
+          <path d="M143 348 L143 358 M150 348 L150 359 M157 348 L157 358" stroke="#8E4F18" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- 오른발 -->
+          <ellipse cx="230" cy="350" rx="20" ry="15" fill="url(#honeyTan)"/>
+          <circle cx="223" cy="350" r="3" fill="#FFE7B3" opacity="0.6"/>
+          <path d="M223 348 L223 358 M230 348 L230 359 M237 348 L237 358" stroke="#8E4F18" stroke-width="2" stroke-linecap="round"/>
+
+          <!-- 4. 왕실 퐁퐁 하얀 털 케이프 칼라 & XIII 골드 메달 -->
+          <path d="M125 240 Q190 270 255 240 Q245 262 190 270 Q135 262 125 240 Z" fill="#FFFFFF" stroke="#FCD34D" stroke-width="2.5"/>
+          <circle cx="155" cy="256" r="3" fill="#1B1C22"/>
+          <circle cx="190" cy="260" r="3" fill="#1B1C22"/>
+          <circle cx="225" cy="256" r="3" fill="#1B1C22"/>
+
+          <!-- XIII 왕실 황금 펜던트 -->
+          <circle cx="190" cy="278" r="13" fill="url(#royalGoldGrad)" stroke="#A06908" stroke-width="2"/>
+          <text x="190" y="283" font-family="'Cinzel', serif" font-size="11" font-weight="900" text-anchor="middle" fill="#4E3302">XIII</text>
+
+          <!-- 5. 치와와 귀 (가로는 넓히고 세로는 낮춘 안정적인 쫑긋 귀) -->
+          <!-- 왼쪽 귀 -->
+          <path d="M140 138 C118 114 90 95 68 86 C65 84 63 88 66 92 C78 122 98 150 116 172 Z" fill="url(#sleekBlackCoat)"/>
+          <path d="M132 142 C118 126 102 115 88 108 C86 106 84 109 85 113 C92 128 102 144 114 156 Z" fill="#FCA5A5" opacity="0.75"/>
+          
+          <!-- 오른쪽 귀 -->
+          <path d="M240 138 C262 114 290 95 312 86 C315 84 317 88 314 92 C302 122 282 150 264 172 Z" fill="url(#sleekBlackCoat)"/>
+          <path d="M248 142 C262 126 278 115 292 108 C294 106 296 109 295 113 C288 128 278 144 266 156 Z" fill="#FCA5A5" opacity="0.75"/>
+
+          <!-- 6. 완벽하게 동글동글한 사과머리 (Super Round Apple Head) -->
+          <circle cx="190" cy="180" r="72" fill="url(#sleekBlackCoat)"/>
+
+          <!-- 7. 앙증맞은 볼 포인트 (Cute Tan Cheek Points) -->
+          <ellipse cx="142" cy="198" rx="16" ry="13" fill="url(#honeyTan)"/>
+          <ellipse cx="238" cy="198" rx="16" ry="13" fill="url(#honeyTan)"/>
+
+          <!-- 은은한 핑크 볼터치 (Soft Blush) -->
+          <circle cx="142" cy="200" r="10" fill="#FF5277" opacity="0.38" filter="url(#softBlush)"/>
+          <circle cx="238" cy="200" r="10" fill="#FF5277" opacity="0.38" filter="url(#softBlush)"/>
+
+          <!-- 8. 유니크한 허스키 스타일 하얀 문양 & 하얀 눈썹 (Husky Blaze & White Eyebrows) -->
+          <!-- 이마 중앙의 자연스러운 하얀 불꽃 문양 (위치를 위로 올려 자연스럽게 배치) -->
+          <path d="M190 126 C195 134 198 140 196 148 C194 154 192 156 190 158 C188 156 186 154 184 148 C182 140 185 134 190 126 Z" fill="#FFFFFF"/>
+          <path d="M190 129 C193 135 195 140 194 146 C192 150 191 152 190 154 C189 152 188 150 186 146 C185 140 187 135 190 129 Z" fill="#F8FAFC" opacity="0.85"/>
+
+          <!-- 새하얀 눈썹 (가로를 넓히고 세로를 줄인 타원형 눈썹) -->
+          <ellipse cx="150" cy="132" rx="14" ry="7.5" fill="#FFFFFF"/>
+          <ellipse cx="150" cy="131" rx="11" ry="5.5" fill="#F1F5F9" opacity="0.6"/>
+          <ellipse cx="230" cy="132" rx="14" ry="7.5" fill="#FFFFFF"/>
+          <ellipse cx="230" cy="131" rx="11" ry="5.5" fill="#F1F5F9" opacity="0.6"/>
+
+          <!-- 9. 더 크고 그윽한 딥 다크 초콜릿 왕눈이 (블랙보다 밝지만 깊고 어두운 홍채) -->
+          <!-- 왼쪽 눈 -->
+          <ellipse cx="154" cy="168" rx="19" ry="20.5" fill="#0C0A09"/>
+          <!-- 블랙보다 밝지만 깊고 그윽한 딥 초콜릿 홍채 -->
+          <ellipse cx="154" cy="169" rx="16.5" ry="17.5" fill="#2B150A"/>
+          <ellipse cx="154" cy="172" rx="13.5" ry="13.5" fill="#422211"/>
+          <ellipse cx="154" cy="174" rx="9.5" ry="8.5" fill="#5A311B" opacity="0.6"/>
+          <!-- 또렷한 동공 -->
+          <ellipse cx="154" cy="168" rx="9" ry="10" fill="#060505"/>
+          <!-- 초롱초롱 보석 하이라이트 -->
+          <circle cx="149" cy="161" r="7" fill="#FFFFFF"/>
+          <circle cx="160" cy="175" r="3.8" fill="#FFFFFF"/>
+          <circle cx="152" cy="178" r="2.0" fill="#FFFFFF"/>
+
+          <!-- 오른쪽 눈 -->
+          <ellipse cx="226" cy="168" rx="19" ry="20.5" fill="#0C0A09"/>
+          <!-- 블랙보다 밝지만 깊고 그윽한 딥 초콜릿 홍채 -->
+          <ellipse cx="226" cy="169" rx="16.5" ry="17.5" fill="#2B150A"/>
+          <ellipse cx="226" cy="172" rx="13.5" ry="13.5" fill="#422211"/>
+          <ellipse cx="226" cy="174" rx="9.5" ry="8.5" fill="#5A311B" opacity="0.6"/>
+          <!-- 또렷한 동공 -->
+          <ellipse cx="226" cy="168" rx="9" ry="10" fill="#060505"/>
+          <!-- 초롱초롱 보석 하이라이트 -->
+          <circle cx="221" cy="161" r="7" fill="#FFFFFF"/>
+          <circle cx="232" cy="175" r="3.8" fill="#FFFFFF"/>
+          <circle cx="224" cy="178" r="2.0" fill="#FFFFFF"/>
+
+          <!-- 10. 앙증맞은 하트 코 & 'ㅅ' 웃는 입 & 혀 쏙 (Cute Muzzle & Tongue) -->
+          <ellipse cx="190" cy="200" rx="17" ry="12" fill="#1C1E24"/>
+          <!-- 촉촉한 코 -->
+          <path d="M184 194 C184 191 188 189 190 192 C192 189 196 191 196 194 C196 199 190 203 190 203 C190 203 184 199 184 194 Z" fill="#0A0B0E"/>
+          <circle cx="188" cy="193" r="1.6" fill="#FFFFFF" opacity="0.8"/>
+
+          <!-- 'ㅅ' 모양의 헤벌레 웃는 강아지 입 -->
+          <path d="M181 205 Q186 209 190 206 Q194 209 199 205" stroke="#0A0B0E" stroke-width="2.4" stroke-linecap="round"/>
+
+          <!-- 핑크빛 젤리 혓바닥 (Cute Pink Tongue) -->
+          <path d="M187 207 C187 213 193 213 193 207 Z" fill="#FF6B8B"/>
+          <line x1="190" y1="207" x2="190" y2="211" stroke="#E63946" stroke-width="1"/>
+
+          <!-- ==============================================
+               [LAYER 3] 머리 위에 쓴 번쩍번쩍 왕관 (Royal Crown)
+               ============================================== -->
+          <g class="royal-crown" transform="rotate(-6 190 85)">
+            <!-- 왕관 본체 -->
+            <path d="M162 104 L166 72 L178 88 L190 60 L202 88 L214 72 L218 104 Z" fill="url(#royalGoldGrad)" stroke="#A06908" stroke-width="2.2"/>
+            <rect x="160" y="100" width="60" height="10" rx="3" fill="#F59E0B" stroke="#A06908" stroke-width="1.8"/>
+            <!-- 찬란한 보석들 -->
+            <circle cx="190" cy="65" r="4.5" fill="#EF4444"/>
+            <circle cx="167" cy="76" r="3.2" fill="#10B981"/>
+            <circle cx="213" cy="76" r="3.2" fill="#10B981"/>
+            <circle cx="174" cy="105" r="2.8" fill="#EF4444"/>
+            <circle cx="190" cy="105" r="3" fill="#FFFFFF"/>
+            <circle cx="206" cy="105" r="2.8" fill="#EF4444"/>
+
+            <!-- 왕관 번쩍임 스파클 -->
+            <path d="M152 74 L156 66 L160 74 L156 82 Z" fill="#FFFBEB"/>
+            <path d="M222 68 L225 61 L228 68 L225 75 Z" fill="#FFFBEB"/>
+          </g>
+        </svg>
+
+        <div class="character-speech-bubble" id="hero-bubble">
+          "포동포동 4.8kg의 위엄! 짐의 왕관이 눈부시지 않느냐!"
+        </div>
+      </div>
+    </div>
+
+    <!-- 퀵 스펙 배지 (4.8kg 반영) -->
+    <div class="hero-quick-stats">
+      <div class="stat-badge">
+        <span class="badge-title">재위 기간</span>
+        <span class="badge-value">7년 차 (7세)</span>
+      </div>
+      <div class="stat-badge">
+        <span class="badge-title">왕실 품종</span>
+        <span class="badge-value">단모 치와와</span>
+      </div>
+      <div class="stat-badge">
+        <span class="badge-title">체중의 위엄</span>
+        <span class="badge-value highlight">4.8kg (포동포동)</span>
+      </div>
+      <div class="stat-badge">
+        <span class="badge-title">퍼스널 코트</span>
+        <span class="badge-value">블랙 & 골드탄</span>
+      </div>
+      <div class="stat-badge">
+        <span class="badge-title">머리 스타일</span>
+        <span class="badge-value">동글 사과머리 🍎</span>
+      </div>
+    </div>
+
+    <div class="hero-actions">
+      <a href="#tribute" class="btn btn-royal">🍗 폐하께 조공 올리기</a>
+      <a href="#about" class="btn btn-outline">📜 칙서 열람하기</a>
+    </div>
+  </header>
+
+  <!-- 메인 본문 컨테이너 -->
+  <main class="content-wrapper">
+
+    <!-- 1. 폐하의 칙서 (About) -->
+    <section id="about" class="section">
+      <div class="section-header">
+        <span class="section-tag">ROYAL DECREE</span>
+        <h2 class="section-title">루이 13세 폐하의 친필 칙서</h2>
+        <div class="royal-divider">✦ 👑 ✦</div>
+      </div>
+
+      <div class="decree-scroll">
+        <div class="scroll-seal">XIII</div>
+        <div class="decree-content">
+          <p class="decree-quote">“경들은 고개를 들라. 짐이 바로 이 집안의 듬직하고 사랑스러운 군주, 루이 13세다!”</p>
+          <p>
+            올해로 재위 7년 차를 맞이하였노라!  
+            별빛 밤하늘 아래서도 매끈하게 윤기 흐르는 흑단빛 벨벳 코트와, 
+            찹쌀떡처럼 동글동글한 사과머리, 그리고 감정을 120% 웅변하는 새하얀 눈썹과 유니크한 허스키 문양이야말로 짐의 국보급 매력이니라.
+          </p>
+          <p>
+            남들은 치와와가 2kg대라 하지만, 짐은 무려 <strong>묵직하고 든든한 4.8kg의 사자왕</strong>이다!  
+            포동포동한 볼살과 묵직한 솜방망이 펀치로 왕국의 평화를 지키고 있으며, 
+            가장 푹신한 극세사 담요를 영토로 선포하고 낮잠을 청하는 평화주의자이기도 하지.
+          </p>
+          <p>
+            충성스러운 랜선 신하들이여! 짐의 총애를 얻고 싶다면 망설이지 말고 바스락거리는 간식을 바치도록 하라. 
+            짐의 공식 궁전에 온 것을 진심으로 환영하노라!
+          </p>
+          <div class="decree-signature">
+            <span class="sig-name">거실 제국 통치자 루이 13세 (4.8kg의 위엄) 🐾</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. 왕실 스펙 & 능력치 (Stats) -->
+    <section id="stats" class="section">
+      <div class="section-header">
+        <span class="section-tag">ROYAL STATUS</span>
+        <h2 class="section-title">폐하의 공식 스탯</h2>
+        <div class="royal-divider">✦ 👑 ✦</div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-name">⚖️ 4.8kg 묵직한 솜방망이 타격감</span>
+            <span class="stat-num">100%</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+          <p class="stat-desc">체중 4.8kg에서 뿜어져 나오는 묵직한 발도장과 듬직한 존재감!</p>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-name">✨ 국보 1호 하얀 눈썹 & 허스키 문양</span>
+            <span class="stat-num">100%</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+          <p class="stat-desc">세상에서 제일 동그랗고 억울한 표정으로 집사의 간식을 갈취하는 필살기.</p>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-name">🍎 동글동글 사과머리 귀여움</span>
+            <span class="stat-num">999%</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width: 100%;"></div></div>
+          <p class="stat-desc">쓰다듬으면 손끝에 착 감기는 완벽한 구형(球形) 두상과 벨벳 코트.</p>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-name">📡 간식 봉지 초정밀 레이더</span>
+            <span class="stat-num">99.9%</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width: 99.9%;"></div></div>
+          <p class="stat-desc">300미터 밖에서 비닐을 스쳐도 번개처럼 쫑긋 서는 왕실 안테나 귀.</p>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-name">⏳ 간식 대기 참을성</span>
+            <span class="stat-num">9%</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill warning" style="width: 9%;"></div></div>
+          <p class="stat-desc">간식을 앞에 두고 3초 이상 지체하면 우렁찬 어명(컹!)이 하사됩니다.</p>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span class="stat-name">🛁 목욕에 대한 자비심</span>
+            <span class="stat-num">0%</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill danger" style="width: 3%;"></div></div>
+          <p class="stat-desc">왕실 헌법 제1조: 폐하의 고귀한 몸에 거품을 묻히는 자는 결코 용서받지 못한다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 일과표 (Daily Routine) -->
+    <section id="routine" class="section">
+      <div class="section-header">
+        <span class="section-tag">DAILY SCHEDULE</span>
+        <h2 class="section-title">루이 13세의 하루 일과</h2>
+        <div class="royal-divider">✦ 👑 ✦</div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="time-marker">07:30</div>
+          <div class="timeline-card">
+            <h3>🌅 4.8kg의 묵직한 모닝 어택</h3>
+            <p>집사의 배 위에 4.8kg 체중을 얹고 얼굴을 찹찹 핥아 아침 수라상을 독촉합니다.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-marker">09:00</div>
+          <div class="timeline-card">
+            <h3>☀️ 왕실 영토 일광욕 순찰</h3>
+            <p>햇살이 제일 따뜻하게 내리쬐는 거실 명당을 찾아 1차 식빵을 노릇노릇 굽습니다.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-marker">13:30</div>
+          <div class="timeline-card">
+            <h3>💤 국가 중요 정사: 대국민 낮잠</h3>
+            <p>극세사 이불 요새 속으로 완전히 파고들어 코를 쌔근쌔근 곱니다.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-marker">18:00</div>
+          <div class="timeline-card">
+            <h3>🛡️ 왕국 철통 경비 작전</h3>
+            <p>복도에서 발소리나 택배 기사님 소리가 들리면 용맹하게 컹컹! 집안을 사수합니다.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="time-marker">21:30</div>
+          <div class="timeline-card">
+            <h3>👑 집사 무릎 접수 및 골골송</h3>
+            <p>소파 위 집사의 무릎을 왕좌로 삼아 턱을 괴고 하루를 마감합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 간식 조공 인터랙티브 존 (Tribute Zone) -->
+    <section id="tribute" class="section tribute-section">
+      <div class="section-header">
+        <span class="section-tag">ROYAL TRIBUTE</span>
+        <h2 class="section-title">🍖 폐하께 간식 조공 바치기</h2>
+        <p class="section-sub">간식을 클릭하여 폐하의 총애와 즉각적인 하사품(대사)을 받아보세요!</p>
+        <div class="royal-divider">✦ 👑 ✦</div>
+      </div>
+
+      <!-- 누적 조공 카운터 -->
+      <div class="tribute-counter-box">
+        <span class="counter-label">현재까지 진상된 총 조공</span>
+        <div class="counter-number-wrapper">
+          <span class="counter-num" id="tribute-count">137</span>
+          <span class="counter-unit">개</span>
+        </div>
+        <div class="king-reaction" id="king-reaction">
+          "흠, 4.8kg를 유지하려면 이 정도 간식은 기본이지! 계속 진상하라!"
+        </div>
+      </div>
+
+      <!-- 간식 선택 카드들 -->
+      <div class="tribute-cards">
+        <button class="tribute-btn" data-snack="chicken" data-name="🍗 수제 닭가슴살 육포">
+          <span class="snack-icon">🍗</span>
+          <span class="snack-title">수제 닭가슴살 육포</span>
+          <span class="snack-sub">단모 벨벳 털의 비결 (+1)</span>
+        </button>
+
+        <button class="tribute-btn" data-snack="cheese" data-name="🧀 왕실 황금 치즈">
+          <span class="snack-icon">🧀</span>
+          <span class="snack-title">왕실 황금 치즈</span>
+          <span class="snack-sub">포동포동 볼살 강화 (+1)</span>
+        </button>
+
+        <button class="tribute-btn" data-snack="beef" data-name="🥩 1등급 한우 져키">
+          <span class="snack-icon">🥩</span>
+          <span class="snack-title">1등급 한우 져키</span>
+          <span class="snack-sub">특급 궁중 진상품 (+3)</span>
+        </button>
+
+        <button class="tribute-btn" data-snack="belly" data-name="🖐️ 통통한 배 긁어드리기">
+          <span class="snack-icon">🖐️</span>
+          <span class="snack-title">포동한 배 긁긁</span>
+          <span class="snack-sub">극락의 발라당 서비스 (+1)</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 5. 왕실 갤러리 (Gallery) -->
+    <section id="gallery" class="section">
+      <div class="section-header">
+        <span class="section-tag">ROYAL MOMENTS</span>
+        <h2 class="section-title">루이 13세 화보 갤러리</h2>
+        <p class="section-sub">단모 블랙탄의 눈부신 벨벳 광택과 마로 눈썹의 매력</p>
+        <div class="royal-divider">✦ 👑 ✦</div>
+      </div>
+
+      <!-- 사진 추가 컨트롤 -->
+      <div class="gallery-controls">
+        <label for="photo-upload" class="btn btn-gold-outline">
+          📷 실제 루이 사진 추가하기
+        </label>
+        <input type="file" id="photo-upload" accept="image/*" style="display:none;">
+        <span class="upload-tip">※ 직접 찍은 루이 13세의 귀여운 실물 사진을 추가하여 앨범을 완성해보세요!</span>
+      </div>
+
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- 갤러리 기본 카드 1 -->
+        <div class="gallery-card">
+          <div class="gallery-img-wrapper velvet-bg">
+            <div class="card-icon-art">👑🐶</div>
+          </div>
+          <div class="gallery-info">
+            <span class="photo-tag">사과머리</span>
+            <h4>동글동글 정면 알현샷</h4>
+            <p>단정한 블랙탄 코트와 앙증맞은 골드 눈썹의 환상 조합</p>
+          </div>
+        </div>
+
+        <!-- 갤러리 기본 카드 2 -->
+        <div class="gallery-card">
+          <div class="gallery-img-wrapper sun-bg">
+            <div class="card-icon-art">☀️🍞</div>
+          </div>
+          <div class="gallery-info">
+            <span class="photo-tag">4.8kg 식빵</span>
+            <h4>햇살 아래 포동포동 식빵</h4>
+            <p>베란다 명당에서 4.8kg의 묵직한 행복을 굽는 중</p>
+          </div>
+        </div>
+
+        <!-- 갤러리 기본 카드 3 -->
+        <div class="gallery-card">
+          <div class="gallery-img-wrapper treat-bg">
+            <div class="card-icon-art">🥺🍗</div>
+          </div>
+          <div class="gallery-info">
+            <span class="photo-tag">궁극의 애교</span>
+            <h4>간식 앞 무장해제 눈빛</h4>
+            <p>이 촉촉한 눈망울 앞에선 그 누구도 간식을 바치지 않을 수 없다</p>
+          </div>
+        </div>
+
+        <!-- 갤러리 기본 카드 4 -->
+        <div class="gallery-card">
+          <div class="gallery-img-wrapper fortress-bg">
+            <div class="card-icon-art">🛏️💤</div>
+          </div>
+          <div class="gallery-info">
+            <span class="photo-tag">이불 요새</span>
+            <h4>극세사 요새 잠입 작전</h4>
+            <p>까만 코와 발바닥만 쏙 내놓고 새근새근 자는 평화로운 오후</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. 충성 방명록 (Guestbook) -->
+    <section id="guestbook" class="section">
+      <div class="section-header">
+        <span class="section-tag">COURT GUESTBOOK</span>
+        <h2 class="section-title">신하들의 충성 서약 & 방명록</h2>
+        <p class="section-sub">루이 13세 폐하께 만수무강 응원 메시지를 남겨주세요!</p>
+        <div class="royal-divider">✦ 👑 ✦</div>
+      </div>
+
+      <div class="guestbook-container">
+        <!-- 방명록 작성 폼 -->
+        <form id="guestbook-form" class="guestbook-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="author-name">신하의 성명 (닉네임)</label>
+              <input type="text" id="author-name" placeholder="예: 1호 충신 집사, 옆동네 말티즈" required maxlength="15">
+            </div>
+            <div class="form-group">
+              <label for="author-title">직책 선택</label>
+              <select id="author-title">
+                <option value="영구 충성 집사">영구 충성 집사 🐾</option>
+                <option value="랜선 이모/삼촌">랜선 이모 / 삼촌 ❤️</option>
+                <option value="궁중 간식 공급관">궁중 간식 공급관 🍗</option>
+                <option value="이불 요새 경비병">이불 요새 경비병 🛡️</option>
+                <option value="동네 친구 댕댕이">동네 친구 댕댕이 🐶</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="author-msg">폐하께 올리는 상소문 (메시지)</label>
+            <textarea id="author-msg" rows="3" placeholder="루이 13세 폐하! 4.8kg 포동포동 찹쌀떡 매력 최고예요! 아프지 말고 20살까지 건강하게 군림하소서!" required maxlength="200"></textarea>
+          </div>
+          <button type="submit" class="btn btn-royal btn-submit">📜 상소문 제출하기</button>
+        </form>
+
+        <!-- 방명록 리스트 -->
+        <div class="guestbook-list" id="guestbook-list">
+          <!-- 기본 샘플 메시지 -->
+          <div class="guest-card">
+            <div class="guest-card-header">
+              <span class="guest-author">수석 집사</span>
+              <span class="guest-badge">영구 충성 집사 🐾</span>
+            </div>
+            <p class="guest-msg">"7년 동안 우리 가족에게 가장 큰 행복을 준 루이야. 4.8kg 포동포동한 몸매와 윤기 나는 털 평생 지켜줄게!"</p>
+            <div class="guest-date">재위 7년 차 공식 서약</div>
+          </div>
+
+          <div class="guest-card">
+            <div class="guest-card-header">
+              <span class="guest-author">랜선 이모</span>
+              <span class="guest-badge">랜선 이모 / 삼촌 ❤️</span>
+            </div>
+            <p class="guest-msg">"동글동글 사과머리에 마로 눈썹 너무 귀여워요 ㅠㅠ 4.8kg 솜방망이 펀치 한번 맞아보고 싶다!"</p>
+            <div class="guest-date">재위 7년 차 공식 서약</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 푸터 -->
+  <footer class="royal-footer">
+    <div class="footer-seal">👑 LOUIS XIII OF CHIHUAHUA 👑</div>
+    <p class="footer-text">
+      거실 왕국 궁내청 | 포동포동 단모 블랙탄 치와와 루이 13세 만수무강 기원 협회<br>
+      건강하게, 씩씩하게, 온 가족의 사랑을 듬뿍 받는 영원한 우리의 4.8kg 듬직한 국왕 폐하.
+    </p>
+    <p class="copyright">Copyright © 2026 House of Louis XIII. All Rights Reserved.</p>
+  </footer>
+
+  <!-- 알림 토스트 -->
+  <div id="toast" class="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
